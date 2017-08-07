@@ -3,8 +3,10 @@
 declare(strict_types=1);
 namespace Mandrill;
 
-class Rejects {
-    public function __construct(Mandrill $master) {
+class Rejects
+{
+    public function __construct(Mandrill $master)
+    {
         $this->master = $master;
     }
 
@@ -22,7 +24,8 @@ class Rejects {
      *     - email string the email address you provided
      *     - added boolean whether the operation succeeded
      */
-    public function add(string $email, $comment=null, $subaccount=null): array {
+    public function add(string $email, $comment = null, $subaccount = null): array
+    {
         $_params = array("email" => $email, "comment" => $comment, "subaccount" => $subaccount);
         return $this->master->call('rejects/add', $_params);
     }
@@ -61,7 +64,8 @@ class Rejects {
      *             - unique_clicks integer the number of unique clicks for emails sent for this sender
      *         - subaccount string the subaccount that this blacklist entry applies to, or null if none.
      */
-    public function getList($email=null, $include_expired=false, $subaccount=null): array {
+    public function getList($email = null, $include_expired = false, $subaccount = null): array
+    {
         $_params = array("email" => $email, "include_expired" => $include_expired, "subaccount" => $subaccount);
         return $this->master->call('rejects/list', $_params);
     }
@@ -79,9 +83,9 @@ class Rejects {
      *     - deleted boolean whether the address was deleted successfully.
      *     - subaccount string the subaccount blacklist that the address was removed from, if any
      */
-    public function delete(string $email, $subaccount=null): array {
+    public function delete(string $email, $subaccount = null): array
+    {
         $_params = array("email" => $email, "subaccount" => $subaccount);
         return $this->master->call('rejects/delete', $_params);
     }
-
 }

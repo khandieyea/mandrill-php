@@ -3,8 +3,10 @@
 declare(strict_types=1);
 namespace Mandrill;
 
-class Metadata {
-    public function __construct(Mandrill $master) {
+class Metadata
+{
+    public function __construct(Mandrill $master)
+    {
         $this->master = $master;
     }
 
@@ -16,7 +18,8 @@ class Metadata {
      *         - state string the current state of the metadata field, one of "active", "delete", or "index"
      *         - view_template string Mustache template to control how the metadata is rendered in your activity log
      */
-    public function getList(): array {
+    public function getList(): array
+    {
         $_params = array();
         return $this->master->call('metadata/list', $_params);
     }
@@ -30,7 +33,8 @@ class Metadata {
      *     - state string the current state of the metadata field, one of "active", "delete", or "index"
      *     - view_template string Mustache template to control how the metadata is rendered in your activity log
      */
-    public function add(string $name, $view_template=null): array {
+    public function add(string $name, $view_template = null): array
+    {
         $_params = array("name" => $name, "view_template" => $view_template);
         return $this->master->call('metadata/add', $_params);
     }
@@ -44,7 +48,8 @@ class Metadata {
      *     - state string the current state of the metadata field, one of "active", "delete", or "index"
      *     - view_template string Mustache template to control how the metadata is rendered in your activity log
      */
-    public function update(string $name, string $view_template): array {
+    public function update(string $name, string $view_template): array
+    {
         $_params = array("name" => $name, "view_template" => $view_template);
         return $this->master->call('metadata/update', $_params);
     }
@@ -57,9 +62,9 @@ class Metadata {
      *     - state string the current state of the metadata field, one of "active", "delete", or "index"
      *     - view_template string Mustache template to control how the metadata is rendered in your activity log
      */
-    public function delete(string $name): array {
+    public function delete(string $name): array
+    {
         $_params = array("name" => $name);
         return $this->master->call('metadata/delete', $_params);
     }
-
 }

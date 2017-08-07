@@ -3,8 +3,10 @@
 declare(strict_types=1);
 namespace Mandrill;
 
-class Exports {
-    public function __construct(Mandrill $master) {
+class Exports
+{
+    public function __construct(Mandrill $master)
+    {
         $this->master = $master;
     }
 
@@ -26,7 +28,8 @@ class Exports {
      *     - state string the export job's state - waiting, working, complete, error, or expired.
      *     - result_url string the url for the export job's results, if the job is completed.
      */
-    public function info(string $id): array {
+    public function info(string $id): array
+    {
         $_params = array("id" => $id);
         return $this->master->call('exports/info', $_params);
     }
@@ -42,7 +45,8 @@ class Exports {
      *         - state string the export job's state - waiting, working, complete, error, or expired.
      *         - result_url string the url for the export job's results, if the job is completed.
      */
-    public function getList(): array {
+    public function getList(): array
+    {
         $_params = array();
         return $this->master->call('exports/list', $_params);
     }
@@ -63,7 +67,8 @@ class Exports {
      *     - state string the export job's state
      *     - result_url string the url for the export job's results, if the job is complete
      */
-    public function rejects($notify_email=null): array {
+    public function rejects($notify_email = null): array
+    {
         $_params = array("notify_email" => $notify_email);
         return $this->master->call('exports/rejects', $_params);
     }
@@ -84,7 +89,8 @@ class Exports {
      *     - state string the export job's state
      *     - result_url string the url for the export job's results, if the job is complete
      */
-    public function whitelist($notify_email=null): array {
+    public function whitelist($notify_email = null): array
+    {
         $_params = array("notify_email" => $notify_email);
         return $this->master->call('exports/whitelist', $_params);
     }
@@ -117,7 +123,8 @@ class Exports {
      *     - state string the export job's state
      *     - result_url string the url for the export job's results, if the job is complete
      */
-    public function activity($notify_email=null, $date_from=null, $date_to=null, $tags=null, $senders=null, $states=null, $api_keys=null): array {
+    public function activity($notify_email = null, $date_from = null, $date_to = null, $tags = null, $senders = null, $states = null, $api_keys = null): array
+    {
         $_params = array("notify_email" => $notify_email, "date_from" => $date_from, "date_to" => $date_to, "tags" => $tags, "senders" => $senders, "states" => $states, "api_keys" => $api_keys);
         return $this->master->call('exports/activity', $_params);
     }

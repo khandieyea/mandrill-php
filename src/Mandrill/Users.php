@@ -3,8 +3,10 @@
 declare(strict_types=1);
 namespace Mandrill;
 
-class Users {
-    public function __construct(Mandrill $master) {
+class Users
+{
+    public function __construct(Mandrill $master)
+    {
         $this->master = $master;
     }
 
@@ -85,7 +87,8 @@ class Users {
      *             - clicks integer the number of URLs that have been clicked in the lifetime of the user's account
      *             - unique_clicks integer the number of unique clicks for emails sent in the lifetime of the user's account
      */
-    public function info(): array {
+    public function info(): array
+    {
         $_params = array();
         return $this->master->call('users/info', $_params);
     }
@@ -94,7 +97,8 @@ class Users {
      * Validate an API key and respond to a ping
      * @return string the string "PONG!"
      */
-    public function ping(): string {
+    public function ping(): string
+    {
         $_params = array();
         return $this->master->call('users/ping', $_params);
     }
@@ -103,7 +107,8 @@ class Users {
      * Validate an API key and respond to a ping (alias)
      * @return array a struct with one key "PING" with a static value "PONG!"
      */
-    public function ping2(): array {
+    public function ping2(): array
+    {
         $_params = array();
         return $this->master->call('users/ping2', $_params);
     }
@@ -125,9 +130,9 @@ class Users {
      *         - unique_opens integer the number of unique opens for emails sent for this sender
      *         - unique_clicks integer the number of unique clicks for emails sent for this sender
      */
-    public function senders(): array {
+    public function senders(): array
+    {
         $_params = array();
         return $this->master->call('users/senders', $_params);
     }
-
 }

@@ -3,8 +3,10 @@
 declare(strict_types=1);
 namespace Mandrill;
 
-class Subaccounts {
-    public function __construct(Mandrill $master) {
+class Subaccounts
+{
+    public function __construct(Mandrill $master)
+    {
         $this->master = $master;
     }
 
@@ -24,7 +26,8 @@ class Subaccounts {
      *         - sent_monthly integer the number of emails the subaccount has sent so far this month (months start on midnight of the 1st, UTC)
      *         - sent_total integer the number of emails the subaccount has sent since it was created
      */
-    public function getList($q=null): array {
+    public function getList($q = null): array
+    {
         $_params = array("q" => $q);
         return $this->master->call('subaccounts/list', $_params);
     }
@@ -47,7 +50,8 @@ class Subaccounts {
      *     - sent_monthly integer the number of emails the subaccount has sent so far this month (months start on midnight of the 1st, UTC)
      *     - sent_total integer the number of emails the subaccount has sent since it was created
      */
-    public function add(string $id, $name=null, $notes=null, $custom_quota=null): array {
+    public function add(string $id, $name = null, $notes = null, $custom_quota = null): array
+    {
         $_params = array("id" => $id, "name" => $name, "notes" => $notes, "custom_quota" => $custom_quota);
         return $this->master->call('subaccounts/add', $_params);
     }
@@ -81,7 +85,8 @@ class Subaccounts {
      *         - clicks integer the number of URLs that have been clicked for this subaccount in the last 30 days
      *         - unique_clicks integer the number of unique clicks for emails sent for this subaccount in the last 30 days
      */
-    public function info(string $id): array {
+    public function info(string $id): array
+    {
         $_params = array("id" => $id);
         return $this->master->call('subaccounts/info', $_params);
     }
@@ -104,7 +109,8 @@ class Subaccounts {
      *     - sent_monthly integer the number of emails the subaccount has sent so far this month (months start on midnight of the 1st, UTC)
      *     - sent_total integer the number of emails the subaccount has sent since it was created
      */
-    public function update(string $id, $name=null, $notes=null, $custom_quota=null): array {
+    public function update(string $id, $name = null, $notes = null, $custom_quota = null): array
+    {
         $_params = array("id" => $id, "name" => $name, "notes" => $notes, "custom_quota" => $custom_quota);
         return $this->master->call('subaccounts/update', $_params);
     }
@@ -124,7 +130,8 @@ class Subaccounts {
      *     - sent_monthly integer the number of emails the subaccount has sent so far this month (months start on midnight of the 1st, UTC)
      *     - sent_total integer the number of emails the subaccount has sent since it was created
      */
-    public function delete(string $id): array {
+    public function delete(string $id): array
+    {
         $_params = array("id" => $id);
         return $this->master->call('subaccounts/delete', $_params);
     }
@@ -144,7 +151,8 @@ class Subaccounts {
      *     - sent_monthly integer the number of emails the subaccount has sent so far this month (months start on midnight of the 1st, UTC)
      *     - sent_total integer the number of emails the subaccount has sent since it was created
      */
-    public function pause(string $id): array {
+    public function pause(string $id): array
+    {
         $_params = array("id" => $id);
         return $this->master->call('subaccounts/pause', $_params);
     }
@@ -164,9 +172,9 @@ class Subaccounts {
      *     - sent_monthly integer the number of emails the subaccount has sent so far this month (months start on midnight of the 1st, UTC)
      *     - sent_total integer the number of emails the subaccount has sent since it was created
      */
-    public function resume(string $id): array {
+    public function resume(string $id): array
+    {
         $_params = array("id" => $id);
         return $this->master->call('subaccounts/resume', $_params);
     }
-
 }

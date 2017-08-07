@@ -3,8 +3,10 @@
 declare(strict_types=1);
 namespace Mandrill;
 
-class Webhooks {
-    public function __construct(Mandrill $master) {
+class Webhooks
+{
+    public function __construct(Mandrill $master)
+    {
         $this->master = $master;
     }
 
@@ -24,7 +26,8 @@ class Webhooks {
      *         - events_sent integer the total number of events that have ever been sent to this webhook
      *         - last_error string if we've ever gotten an error trying to post to this webhook, the last error that we've seen
      */
-    public function getList(): array {
+    public function getList(): array
+    {
         $_params = array();
         return $this->master->call('webhooks/list', $_params);
     }
@@ -48,7 +51,8 @@ class Webhooks {
      *     - events_sent integer the total number of events that have ever been sent to this webhook
      *     - last_error string if we've ever gotten an error trying to post to this webhook, the last error that we've seen
      */
-    public function add(string $url, $description=null, $events=array()): array {
+    public function add(string $url, $description = null, $events = array()): array
+    {
         $_params = array("url" => $url, "description" => $description, "events" => $events);
         return $this->master->call('webhooks/add', $_params);
     }
@@ -69,7 +73,8 @@ class Webhooks {
      *     - events_sent integer the total number of events that have ever been sent to this webhook
      *     - last_error string if we've ever gotten an error trying to post to this webhook, the last error that we've seen
      */
-    public function info(int $id): array {
+    public function info(int $id): array
+    {
         $_params = array("id" => $id);
         return $this->master->call('webhooks/info', $_params);
     }
@@ -94,7 +99,8 @@ class Webhooks {
      *     - events_sent integer the total number of events that have ever been sent to this webhook
      *     - last_error string if we've ever gotten an error trying to post to this webhook, the last error that we've seen
      */
-    public function update(int $id, string $url, $description=null, $events=array()): array {
+    public function update(int $id, string $url, $description = null, $events = array()): array
+    {
         $_params = array("id" => $id, "url" => $url, "description" => $description, "events" => $events);
         return $this->master->call('webhooks/update', $_params);
     }
@@ -115,9 +121,9 @@ class Webhooks {
      *     - events_sent integer the total number of events that have ever been sent to this webhook
      *     - last_error string if we've ever gotten an error trying to post to this webhook, the last error that we've seen
      */
-    public function delete(int $id): array {
+    public function delete(int $id): array
+    {
         $_params = array("id" => $id);
         return $this->master->call('webhooks/delete', $_params);
     }
-
 }

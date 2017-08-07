@@ -3,8 +3,10 @@
 declare(strict_types=1);
 namespace Mandrill;
 
-class Urls {
-    public function __construct(Mandrill $master) {
+class Urls
+{
+    public function __construct(Mandrill $master)
+    {
         $this->master = $master;
     }
 
@@ -17,7 +19,8 @@ class Urls {
      *         - clicks integer the number of times the URL has been clicked from a tracked email
      *         - unique_clicks integer the number of unique emails that have generated clicks for this URL
      */
-    public function getList(): array {
+    public function getList(): array
+    {
         $_params = array();
         return $this->master->call('urls/list', $_params);
     }
@@ -32,7 +35,8 @@ class Urls {
      *         - clicks integer the number of times the URL has been clicked from a tracked email
      *         - unique_clicks integer the number of unique emails that have generated clicks for this URL
      */
-    public function search(string $q): array {
+    public function search(string $q): array
+    {
         $_params = array("q" => $q);
         return $this->master->call('urls/search', $_params);
     }
@@ -47,7 +51,8 @@ class Urls {
      *         - clicks integer the number of times the URL was clicked during the hour
      *         - unique_clicks integer the number of unique clicks generated for emails sent with this URL during the hour
      */
-    public function timeSeries(string $url): array {
+    public function timeSeries(string $url): array
+    {
         $_params = array("url" => $url);
         return $this->master->call('urls/time-series', $_params);
     }
@@ -65,7 +70,8 @@ class Urls {
      *             - error string an error describing the CNAME record, or null if the record is correct
      *         - valid_tracking boolean whether this domain can be used as a tracking domain for email.
      */
-    public function trackingDomains(): array {
+    public function trackingDomains(): array
+    {
         $_params = array();
         return $this->master->call('urls/tracking-domains', $_params);
     }
@@ -83,7 +89,8 @@ class Urls {
      *         - error string an error describing the CNAME record, or null if the record is correct
      *     - valid_tracking boolean whether this domain can be used as a tracking domain for email.
      */
-    public function addTrackingDomain(string $domain): array {
+    public function addTrackingDomain(string $domain): array
+    {
         $_params = array("domain" => $domain);
         return $this->master->call('urls/add-tracking-domain', $_params);
     }
@@ -101,9 +108,9 @@ class Urls {
      *         - error string an error describing the CNAME record, or null if the record is correct
      *     - valid_tracking boolean whether this domain can be used as a tracking domain for email.
      */
-    public function checkTrackingDomain(string $domain): array {
+    public function checkTrackingDomain(string $domain): array
+    {
         $_params = array("domain" => $domain);
         return $this->master->call('urls/check-tracking-domain', $_params);
     }
-
 }

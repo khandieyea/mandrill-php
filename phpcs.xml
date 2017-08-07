@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ruleset name="PHP_CodeSniffer">
+    <description>PHP coding style</description>
+
+    <file>src</file>
+
+    <arg name="extensions" value="php" />
+
+    <rule ref="PSR2">
+    </rule>
+</ruleset>

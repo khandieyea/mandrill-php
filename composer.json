@@ -13,9 +13,19 @@
     "require": {
         "php": ">=7.0.0"
     },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.0.2"
+    },
     "autoload": {
         "psr-4": {
             "Mandrill\\": "src/Mandrill/"
         }
+    },
+    "scripts": {
+        "lint": "composer syntax && composer style",
+        "style": "vendor/bin/phpcs -spn",
+        "style:all": "vendor/bin/phpcs -sp",
+        "style:fix": "vendor/bin/phpcbf -sp",
+        "syntax": "find . -path ./vendor -prune -o -iname '*.php' | xargs -n1 php -l"
     }
 }

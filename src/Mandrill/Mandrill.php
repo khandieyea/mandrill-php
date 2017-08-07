@@ -44,9 +44,15 @@ class Mandrill
 
     public function __construct($apikey = null)
     {
-        if (!$apikey) $apikey = getenv('MANDRILL_APIKEY');
-        if (!$apikey) $apikey = $this->readConfigs();
-        if (!$apikey) throw new InvalidKeyException('You must provide a Mandrill API key');
+        if (!$apikey) {
+            $apikey = getenv('MANDRILL_APIKEY');
+        }
+        if (!$apikey) {
+            $apikey = $this->readConfigs();
+        }
+        if (!$apikey) {
+            throw new InvalidKeyException('You must provide a Mandrill API key');
+        }
         $this->apikey = $apikey;
 
         $this->ch = curl_init();
@@ -77,11 +83,13 @@ class Mandrill
         $this->metadata = new Metadata($this);
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         curl_close($this->ch);
     }
 
-    public function call($url, $params) {
+    public function call($url, $params)
+    {
         $params['key'] = $this->apikey;
         $params = json_encode($params);
         $ch = $this->ch;
@@ -93,7 +101,7 @@ class Mandrill
 
         $start = microtime(true);
         $this->log('Call to ' . $this->root . $url . '.json: ' . $params);
-        if($this->debug) {
+        if ($this->debug) {
             $curl_buffer = fopen('php://memory', 'w+');
             curl_setopt($ch, CURLOPT_STDERR, $curl_buffer);
         }
@@ -101,7 +109,7 @@ class Mandrill
         $response_body = curl_exec($ch);
         $info = curl_getinfo($ch);
         $time = microtime(true) - $start;
-        if($this->debug) {
+        if ($this->debug) {
             rewind($curl_buffer);
             $this->log(stream_get_contents($curl_buffer));
             fclose($curl_buffer);
@@ -109,25 +117,30 @@ class Mandrill
         $this->log('Completed in ' . number_format($time * 1000, 2) . 'ms');
         $this->log('Got response: ' . $response_body);
 
-        if(curl_error($ch)) {
+        if (curl_error($ch)) {
             throw new Exception("API call to $url failed: " . curl_error($ch));
         }
         $result = json_decode($response_body, true);
-        if($result === null) throw new Exception('We were unable to decode the JSON response from the Mandrill API: ' . $response_body);
+        if ($result === null) {
+            throw new Exception('We were unable to decode the JSON response from the Mandrill API: ' . $response_body);
+        }
 
-        if(floor($info['http_code'] / 100) >= 4) {
+        if (floor($info['http_code'] / 100) >= 4) {
             throw $this->castError($result);
         }
 
         return $result;
     }
 
-    public function readConfigs() {
+    public function readConfigs()
+    {
         $paths = array('~/.mandrill.key', '/etc/mandrill.key');
-        foreach($paths as $path) {
-            if(file_exists($path)) {
+        foreach ($paths as $path) {
+            if (file_exists($path)) {
                 $apikey = trim(file_get_contents($path));
-                if($apikey) return $apikey;
+                if ($apikey) {
+                    return $apikey;
+                }
             }
         }
         return false;
@@ -165,8 +178,9 @@ class Mandrill
         'ValidationError' =>            ValidationError::class,
     ];
 
-    public function castError($result): Exception {
-        if($result['status'] !== 'error' || !$result['name']) {
+    public function castError($result): Exception
+    {
+        if ($result['status'] !== 'error' || !$result['name']) {
             throw new UnexpectedException(json_encode($result));
         }
 
@@ -174,7 +188,10 @@ class Mandrill
         return new $class($result['message'], $result['code']);
     }
 
-    public function log(string $msg) {
-        if ($this->debug) { error_log($msg); }
+    public function log(string $msg)
+    {
+        if ($this->debug) {
+            error_log($msg);
+        }
     }
 }

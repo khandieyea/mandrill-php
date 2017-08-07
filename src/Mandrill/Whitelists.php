@@ -3,8 +3,10 @@
 declare(strict_types=1);
 namespace Mandrill;
 
-class Whitelists {
-    public function __construct(Mandrill $master) {
+class Whitelists
+{
+    public function __construct(Mandrill $master)
+    {
         $this->master = $master;
     }
 
@@ -20,7 +22,8 @@ class Whitelists {
      *     - email string the email address you provided
      *     - added boolean whether the operation succeeded
      */
-    public function add(string $email, $comment=null): array {
+    public function add(string $email, $comment = null): array
+    {
         $_params = array("email" => $email, "comment" => $comment);
         return $this->master->call('whitelists/add', $_params);
     }
@@ -37,7 +40,8 @@ class Whitelists {
      *         - detail string a description of why the email was whitelisted
      *         - created_at string when the email was added to the whitelist
      */
-    public function getList($email=null): array {
+    public function getList($email = null): array
+    {
         $_params = array("email" => $email);
         return $this->master->call('whitelists/list', $_params);
     }
@@ -49,9 +53,9 @@ class Whitelists {
      *     - email string the email address that was removed from the blacklist
      *     - deleted boolean whether the address was deleted successfully
      */
-    public function delete(string $email): array {
+    public function delete(string $email): array
+    {
         $_params = array("email" => $email);
         return $this->master->call('whitelists/delete', $_params);
     }
-
 }
