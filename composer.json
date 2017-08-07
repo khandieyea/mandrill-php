@@ -10,7 +10,8 @@
       {"name": "Mandrill Devs", "email": "community@mandrill.com", "homepage": "http://mandrill.com"}
     ],
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=7.0.0",
+        "guzzlehttp/guzzle": "^6.3.0"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.0.2"
