@@ -1,6 +1,9 @@
 <?php
 
-class Mandrill_Templates {
+declare(strict_types=1);
+namespace Mandrill;
+
+class Templates {
     public function __construct(Mandrill $master) {
         $this->master = $master;
     }
@@ -16,7 +19,7 @@ class Mandrill_Templates {
      * @param boolean $publish set to false to add a draft template without publishing
      * @param array $labels an optional array of up to 10 labels to use for filtering templates
      *     - labels[] string a single label
-     * @return struct the information saved about the new template
+     * @return array the information saved about the new template
      *     - slug string the immutable unique code name of the template
      *     - name string the name of the template
      *     - labels array the list of labels applied to the template
@@ -36,7 +39,7 @@ class Mandrill_Templates {
      *     - created_at string the date and time the template was first created as a UTC string in YYYY-MM-DD HH:MM:SS format
      *     - updated_at string the date and time the template was last modified as a UTC string in YYYY-MM-DD HH:MM:SS format
      */
-    public function add($name, $from_email=null, $from_name=null, $subject=null, $code=null, $text=null, $publish=true, $labels=array()) {
+    public function add(string $name, $from_email=null, $from_name=null, $subject=null, $code=null, $text=null, $publish=true, $labels = []): array {
         $_params = array("name" => $name, "from_email" => $from_email, "from_name" => $from_name, "subject" => $subject, "code" => $code, "text" => $text, "publish" => $publish, "labels" => $labels);
         return $this->master->call('templates/add', $_params);
     }
@@ -44,7 +47,7 @@ class Mandrill_Templates {
     /**
      * Get the information for an existing template
      * @param string $name the immutable name of an existing template
-     * @return struct the requested template information
+     * @return array the requested template information
      *     - slug string the immutable unique code name of the template
      *     - name string the name of the template
      *     - labels array the list of labels applied to the template
@@ -64,7 +67,7 @@ class Mandrill_Templates {
      *     - created_at string the date and time the template was first created as a UTC string in YYYY-MM-DD HH:MM:SS format
      *     - updated_at string the date and time the template was last modified as a UTC string in YYYY-MM-DD HH:MM:SS format
      */
-    public function info($name) {
+    public function info(string $name): array {
         $_params = array("name" => $name);
         return $this->master->call('templates/info', $_params);
     }
@@ -80,7 +83,7 @@ class Mandrill_Templates {
      * @param boolean $publish set to false to update the draft version of the template without publishing
      * @param array $labels an optional array of up to 10 labels to use for filtering templates
      *     - labels[] string a single label
-     * @return struct the template that was updated
+     * @return array the template that was updated
      *     - slug string the immutable unique code name of the template
      *     - name string the name of the template
      *     - labels array the list of labels applied to the template
@@ -100,7 +103,7 @@ class Mandrill_Templates {
      *     - created_at string the date and time the template was first created as a UTC string in YYYY-MM-DD HH:MM:SS format
      *     - updated_at string the date and time the template was last modified as a UTC string in YYYY-MM-DD HH:MM:SS format
      */
-    public function update($name, $from_email=null, $from_name=null, $subject=null, $code=null, $text=null, $publish=true, $labels=null) {
+    public function update(string $name, $from_email=null, $from_name=null, $subject=null, $code=null, $text=null, $publish=true, $labels=null): array {
         $_params = array("name" => $name, "from_email" => $from_email, "from_name" => $from_name, "subject" => $subject, "code" => $code, "text" => $text, "publish" => $publish, "labels" => $labels);
         return $this->master->call('templates/update', $_params);
     }
@@ -108,7 +111,7 @@ class Mandrill_Templates {
     /**
      * Publish the content for the template. Any new messages sent using this template will start using the content that was previously in draft.
      * @param string $name the immutable name of an existing template
-     * @return struct the template that was published
+     * @return array the template that was published
      *     - slug string the immutable unique code name of the template
      *     - name string the name of the template
      *     - labels array the list of labels applied to the template
@@ -128,7 +131,7 @@ class Mandrill_Templates {
      *     - created_at string the date and time the template was first created as a UTC string in YYYY-MM-DD HH:MM:SS format
      *     - updated_at string the date and time the template was last modified as a UTC string in YYYY-MM-DD HH:MM:SS format
      */
-    public function publish($name) {
+    public function publish(string $name): array {
         $_params = array("name" => $name);
         return $this->master->call('templates/publish', $_params);
     }
@@ -136,7 +139,7 @@ class Mandrill_Templates {
     /**
      * Delete a template
      * @param string $name the immutable name of an existing template
-     * @return struct the template that was deleted
+     * @return array the template that was deleted
      *     - slug string the immutable unique code name of the template
      *     - name string the name of the template
      *     - labels array the list of labels applied to the template
@@ -156,7 +159,7 @@ class Mandrill_Templates {
      *     - created_at string the date and time the template was first created as a UTC string in YYYY-MM-DD HH:MM:SS format
      *     - updated_at string the date and time the template was last modified as a UTC string in YYYY-MM-DD HH:MM:SS format
      */
-    public function delete($name) {
+    public function delete(string $name): array {
         $_params = array("name" => $name);
         return $this->master->call('templates/delete', $_params);
     }
@@ -185,7 +188,7 @@ class Mandrill_Templates {
      *         - created_at string the date and time the template was first created as a UTC string in YYYY-MM-DD HH:MM:SS format
      *         - updated_at string the date and time the template was last modified as a UTC string in YYYY-MM-DD HH:MM:SS format
      */
-    public function getList($label=null) {
+    public function getList($label=null): array {
         $_params = array("label" => $label);
         return $this->master->call('templates/list', $_params);
     }
@@ -206,7 +209,7 @@ class Mandrill_Templates {
      *         - clicks integer the number of tracked URLs clicked during the hour
      *         - unique_clicks integer the number of unique clicks generated by messages sent during the hour
      */
-    public function timeSeries($name) {
+    public function timeSeries(string $name): array {
         $_params = array("name" => $name);
         return $this->master->call('templates/time-series', $_params);
     }
@@ -222,14 +225,12 @@ class Mandrill_Templates {
      *     - merge_vars[] struct a single merge variable
      *         - name string the merge variable's name. Merge variable names are case-insensitive and may not start with _
      *         - content string the merge variable's content
-     * @return struct the result of rendering the given template with the content and merge field values injected
+     * @return array the result of rendering the given template with the content and merge field values injected
      *     - html string the rendered HTML as a string
      */
-    public function render($template_name, $template_content, $merge_vars=null) {
+    public function render(string $template_name, array $template_content, $merge_vars=null): array {
         $_params = array("template_name" => $template_name, "template_content" => $template_content, "merge_vars" => $merge_vars);
         return $this->master->call('templates/render', $_params);
     }
 
 }
-
-
