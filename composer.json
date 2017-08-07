@@ -1,7 +1,6 @@
 {
     "name": "passcod/mandrill",
     "type": "library",
-    "version": "2.0.0",
     "description": "API library for the Mandrill email service",
     "keywords": ["email", "api", "mandrill"],
     "homepage": "https://github.com/passcod/mandrill-php",
