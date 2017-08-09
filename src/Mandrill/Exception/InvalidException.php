@@ -8,6 +8,6 @@ namespace Mandrill\Exception;
  *
  * @internal
  */
-class InvalidException extends \InvalidArgumentException implements Exception
+class InvalidException extends Exception
 {
 }
