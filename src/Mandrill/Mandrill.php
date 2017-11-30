@@ -175,7 +175,7 @@ class Mandrill
         'Unknown_TrackingDomain' =>     UnknownTrackingDomainException::class,
         'Unknown_Url' =>                UnknownURLException::class,
         'Unknown_Webhook' =>            UnknownWebhookException::class,
-        'ValidationError' =>            ValidationError::class,
+        'ValidationError' =>            ValidationException::class,
     ];
 
     public function castError($result): Exception
