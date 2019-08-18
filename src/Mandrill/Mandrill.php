@@ -33,7 +33,7 @@ use Mandrill\Exception\UnknownTemplateException;
 use Mandrill\Exception\UnknownTrackingDomainException;
 use Mandrill\Exception\UnknownURLException;
 use Mandrill\Exception\UnknownWebhookException;
-use Mandrill\Exception\ValidationError;
+use Mandrill\Exception\ValidationException;
 
 class Mandrill
 {
